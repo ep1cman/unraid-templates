@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>UniFi Protect Backup</Name>
+  <Repository>ghcr.io/ep1cman/unifi-protect-backup:latest</Repository>
+  <Registry>https://github.com/ep1cman/unifi-protect-backup/pkgs/container/unifi-protect-backup</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/ep1cman/unifi-protect-backup/discussions</Support>
+  <Project>https://github.com/ep1cman/unifi-protect-backup</Project>
+  <Overview>
+  A Python based tool for backing up UniFi Protect event clips as they occur to cloud storage.
+
+  You will need to place a rclone configuration file at `/mnt/user/appdata/unifi-protect-backup/rclone.conf`.
+  You can either copy this from a rclone installation on your machine, or you can creat one with a docker container as described here: https://github.com/ep1cman/unifi-protect-backup#docker-container
+  </Overview>
+  <Category>Backup</Category>
+  <TemplateURL>https://raw.githubusercontent.com/ep1cman/unraid-templates/master/unifi-protect-backup-unraid-docker.xml</TemplateURL>
+  <DonateLink>https://www.buymeacoffee.com/ep1cman</DonateLink>  
+  <Config Name="TimeZone" Target="TZ" Default="UTC" Mode="" Description="TimeZone for the container refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for a list of possible timezones" Type="Variable" Display="always" Required="true" Mask="false" />
+  <Config Name="UniFi Protect username" Target="UFP_USERNAME" Default="" Mode="" Description="Username to login to Unifi Protect instance" Type="Variable" Display="always" Required="true" Mask="false" />
+  <Config Name="UniFi Protect password" Target="UFP_PASSWORD" Default="" Mode="" Description="Password for Unifi Protect user" Type="Variable" Display="always" Required="true" Mask="true" />
+  <Config Name="UniFi Protect address" Target="UFP_ADDRESS" Default="" Mode="" Description="Address of Unifi Protect instance" Type="Variable" Display="always" Required="true" Mask="false" />
+  <Config Name="UniFi Protect port" Target="UFP_PORT" Default="443" Mode="" Description="Port of Unifi Protect instance" Type="Variable" Display="always" Required="true" Mask="false" />
+  <Config Name="Verify SSL certificate" Target="UFP_SSL_VERIFY" Default="false" Mode="" Description="Set to false if your UniFi protect instances doesn't have a valid SSL certificate" Type="Variable" Display="always" Required="true" Mask="false" />
+  <Config Name="Clip retention period" Target="RCLONE_RETENTION" Default="7d" Mode="" Description="How long should event clips be backed up for. Format as per the `--max-age` argument of `rclone` (https://rclone.org/filtering/#max-age-don-t-transfer-any-file-older-than-this)" Type="Variable" Display="always" Required="true" Mask="false" />
+  <Config Name="rclone destination" Target="RCLONE_DESTINATION" Default="" Mode="" Description="`rclone` destination path in the format {rclone remote}:{path on remote}. E.g.`gdrive:/backups/unifi_protect`" Type="Variable" Display="always" Required="true" Mask="false" />
+  <Config Name="Logging Verbosity" Target="VERBOSITY" Default="v" Mode="" Description="More `v`s = more verbost logging" Type="Variable" Display="always" Required="false" Mask="false" />
+  <Config Name="Config" Target="/root/.config/rclone/" Default="/mnt/user/appdata/unifi-protect-backup/" Mode="r" Description="Location of rclone configuration files" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/unifi-protect-backup</Config>
+  
+</Container>
